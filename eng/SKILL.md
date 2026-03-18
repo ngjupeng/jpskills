@@ -1,60 +1,73 @@
 ---
 name: eng
-description: Full engineering workflow — plan, design, review, QA, ship. Use when building, reviewing, or shipping code.
+description: Full engineering workflow — plan, design, review, QA, ship. Powered by gstack (by Garry Tan). Use when building, reviewing, or shipping code.
 ---
 
 # Engineering Workflow
 
-A complete engineering pipeline in one skill. Tell me which phase you need, or describe what you're doing and I'll pick the right one.
+A complete engineering pipeline. Tell me which phase you need, or describe what you're doing and I'll pick the right one.
+
+Based on [gstack](https://github.com/garrytan/gstack) by Garry Tan. Original skills included with full content.
 
 ## Phases
 
-| Phase | When to use | Command |
-|-------|-------------|---------|
-| **plan** | Before writing code — lock architecture, find edge cases | `/eng plan` |
-| **design** | Need a design system or design consultation | `/eng design` |
-| **review** | Code is written, need pre-merge review | `/eng review` |
-| **qa** | Test the app, find and fix bugs | `/eng qa` |
-| **ship** | Ready to push — tests, changelog, PR | `/eng ship` |
-| **retro** | Weekly retrospective on git activity | `/eng retro` |
+| Command | Skill | What it does |
+|---------|-------|-------------|
+| `/eng plan` | plan-ceo-review | Rethink from first principles, find the 10-star version |
+| `/eng plan design` | plan-design-review | Rate plan across 7 design dimensions (0-10) |
+| `/eng plan eng` | plan-eng-review | Lock architecture, data flow, edge cases, test plan |
+| `/eng design` | design-consultation | Build complete design system → DESIGN.md |
+| `/eng review` | review | Staff engineer pre-merge diff review |
+| `/eng design review` | design-review | Visual QA — find and fix UI inconsistencies |
+| `/eng qa` | qa | Headless browser testing + find and fix bugs |
+| `/eng qa report` | qa-only | Same testing, report-only (no fixes) |
+| `/eng ship` | ship | Tests → version → changelog → push → PR |
+| `/eng docs` | document-release | Auto-update all docs after shipping |
+| `/eng retro` | retro | Weekly retrospective from git metrics |
+| `/eng browse` | browse | Headless browser commands |
+| `/eng cookies` | setup-browser-cookies | Import browser cookies for auth testing |
 
-## How to Use
+## Routing
 
-Just describe what you need. Examples:
-- "I need to plan the architecture for a new feature" → plan phase
-- "Review my code before I merge" → review phase
-- "Test my app and fix any bugs" → qa phase
-- "Ship it" → ship phase
+Based on the user's request, read the corresponding SKILL.md from the subdirectory:
 
-Or specify directly: `/eng plan`, `/eng review`, `/eng qa`, `/eng ship`
+- Plan (CEO): `plan-ceo-review/SKILL.md`
+- Plan (Design): `plan-design-review/SKILL.md`
+- Plan (Eng): `plan-eng-review/SKILL.md`
+- Design system: `design-consultation/SKILL.md`
+- Code review: `review/SKILL.md`
+- Design review: `design-review/SKILL.md`
+- QA (fix): `qa/SKILL.md`
+- QA (report): `qa-only/SKILL.md`
+- Ship: `ship/SKILL.md`
+- Docs: `document-release/SKILL.md`
+- Retro: `retro/SKILL.md`
+- Browse: `browse/SKILL.md`
+- Cookies: `setup-browser-cookies/SKILL.md`
 
-## Phase Details
-
-Read the appropriate file from `phases/` directory based on the user's request:
-- Plan: `phases/plan.md`
-- Design: `phases/design.md`
-- Review: `phases/review.md`
-- QA: `phases/qa.md`
-- Ship: `phases/ship.md`
-- Retro: `phases/retro.md`
+Read the full SKILL.md for the selected phase and follow its instructions exactly.
 
 ## Workflow Pipeline
 
-Skills pass data to each other:
 ```
-/eng plan → produces architecture doc + test plan
+/eng plan          → architecture + test plan
+/eng plan design   → design dimension scoring
+/eng plan eng      → data flow + edge cases
     ↓
-/eng design → produces DESIGN.md (design system)
+/eng design        → DESIGN.md (design system)
     ↓
 (user writes code)
     ↓
-/eng review → staff engineer diff review, auto-fixes mechanical issues
+/eng review        → staff engineer diff review
+/eng design review → visual QA + fixes
     ↓
-/eng qa → headless browser testing, finds bugs, fixes them
+/eng qa            → browser testing + bug fixes
     ↓
-/eng ship → tests → version bump → changelog → push → PR
+/eng ship          → tests → version → changelog → PR
     ↓
-/eng retro → weekly metrics and retrospective
+/eng docs          → update README, ARCHITECTURE, CHANGELOG
+    ↓
+/eng retro         → weekly metrics + retrospective
 ```
 
 $ARGUMENTS
