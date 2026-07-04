@@ -49,6 +49,11 @@ npx skills add ngjupeng/jpskills --skill vm-setup
 |-------|-------------|
 | `/vm-setup` | Set up persistent Claude sessions on GCP VM with tmux + kitty |
 
+### Multi-session workflow
+| Skill | What it does |
+|-------|-------------|
+| `/branch-tab` | Fork your current Claude session into a new terminal tab and auto-resume it there. Branch a conversation while the original tab keeps working. Auto-detects cmux, tmux, WezTerm, kitty, iTerm2, Apple Terminal, Ghostty. |
+
 ## Who is this for?
 
 Technical founders who use Claude Code for both business and engineering work. If you're building a startup and want Claude to be your cofounder, VC advisor, marketing strategist, and senior engineer — this is for you.
