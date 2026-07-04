@@ -1,62 +1,47 @@
 # jpskills
 
-Personal Claude Code skills collection by [@ngjupeng](https://x.com/ngjupeng).
+Claude Code skills by [@ngjupeng](https://x.com/ngjupeng).
 
-Founder toolkit — business strategy, marketing, competitive intelligence, and VM workflow for running Claude Code at scale.
+## `/branch-tab`
 
-## Install
+Fork your current Claude Code session into a **new terminal tab** and auto-resume it there, so you can branch a conversation while the original tab keeps working.
+
+It collapses the usual 3 step ritual into one command:
+
+1. `/branch` (fork the conversation)
+2. open a new terminal tab
+3. `claude --resume <id>`
+
+Type `/branch-tab` and it does all three. The new tab gets the full prior context but a brand new session ID, so it runs independently. Your original tab is untouched.
+
+### Install
 
 ```bash
-# Install all skills
-npx skills add ngjupeng/jpskills
-
-# Install a specific skill
-npx skills add ngjupeng/jpskills --skill vm-setup
+npx skills add ngjupeng/jpskills --skill branch-tab
 ```
 
-## Skills
+Then type `/branch-tab` in any Claude Code session.
 
-### Business & Strategy
-| Skill | What it does |
-|-------|-------------|
-| `/vc-review` | Brutally honest VC due diligence on your project |
-| `/cofounder` | Sparring partner that challenges your reasoning |
-| `/competitors` | Deep competitive intelligence with web research |
-| `/market-research` | Market sizing, trends, regulation with cited sources |
-| `/fill-form` | Fill accelerator/grant/fellowship applications |
-| `/simulate` | Simulate VC interviews, pitches, user interviews, board meetings |
+### Supported terminals
 
-### Ideation
-| Skill | What it does |
-|-------|-------------|
-| `/brainstorm` | 3-tier ideation with research from startup idea databases |
-| `/ideate` | Diverge→Filter→Converge framework with real market signals |
+Auto-detected: cmux, tmux, WezTerm, kitty, iTerm2, Apple Terminal, and Ghostty. Anything else falls back to printing the command for you to paste into a new tab yourself.
 
-### Content & Marketing
-| Skill | What it does |
-|-------|-------------|
-| `/marketing` | Crypto-native content for X, LinkedIn, HackerNews, blogs |
-| `/prompt-engineer` | Convert casual prompts into systematic LLM prompts |
+> Note: only cmux is exercised end to end by the author. The others use each terminal's standard tab or window CLI. Standalone Ghostty has no API to add a tab to the current window, so it opens a new window instead.
 
-### Engineering
-| Skill | What it does |
-|-------|-------------|
-| `/review` | Senior engineer review — tears apart plans/code/proposals |
-| `/handoff` | Write HANDOFF.md for session continuity |
+### Options
 
-### Infrastructure
-| Skill | What it does |
-|-------|-------------|
-| `/vm-setup` | Set up persistent Claude sessions on GCP VM with tmux + kitty |
+Set these as environment variables:
 
-### Multi-session workflow
-| Skill | What it does |
-|-------|-------------|
-| `/branch-tab` | Fork your current Claude session into a new terminal tab and auto-resume it there. Branch a conversation while the original tab keeps working. Auto-detects cmux, tmux, WezTerm, kitty, iTerm2, Apple Terminal, Ghostty. |
+- `BRANCH_TAB_FOCUS=false`: open the branch tab in the background instead of jumping to it.
+- `BRANCH_TAB_CMD="codex ..."`: fork a different agent or command instead of Claude.
 
-## Who is this for?
+### No prompt setup
 
-Technical founders who use Claude Code for both business and engineering work. If you're building a startup and want Claude to be your cofounder, VC advisor, marketing strategist, and senior engineer — this is for you.
+The first run may ask for approval. To make it run with zero prompts, add this to `~/.claude/settings.json` under `permissions.allow`, adjusting the path to where the skill is installed (usually `~/.claude/skills/branch-tab`):
+
+```json
+"Bash(bash /Users/<you>/.claude/skills/branch-tab/scripts/branch-tab.sh)"
+```
 
 ## License
 
